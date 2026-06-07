@@ -7,9 +7,9 @@ int main(void)
 
     while (1) {
         led_mgr_on();
-        // led_mgr_delay(800000U);
+        led_mgr_delay(800000U);
 
-        // led_mgr_off();
-        // led_mgr_delay(800000U);
+        led_mgr_off();
+        led_mgr_delay(800000U);
     }
 }
