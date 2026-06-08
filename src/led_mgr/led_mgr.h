@@ -13,4 +13,7 @@ void led_mgr_off(void);
 /* Simple busy-wait delay (≈500 ms @ 16 MHz HSI per 800 000 ticks). */
 void led_mgr_delay(volatile uint32_t ticks);
 
+/* Blink the LED a given number of times. */
+void led_mgr_blink(uint32_t times);
+
 #endif /* LED_MGR_H */

@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ELF="${1:-build/blink.elf}"
+BUILD_DIR="${1:-build}"
+ELF="${BUILD_DIR}/firmware.elf"
 
 if [[ ! -f "$ELF" ]]; then
     echo "Error: firmware not found at '$ELF'" >&2
-    echo "Run: cmake -S . -B build -G Ninja && cmake --build build" >&2
+    echo "Usage: ./flash.sh [build-dir]" >&2
     exit 1
 fi
 
-echo "Flashing $ELF ..."
+# Select OpenOCD target config from CMakeCache BOARD variable
+BOARD=$(grep -m1 "^BOARD:" "${BUILD_DIR}/CMakeCache.txt" 2>/dev/null | cut -d= -f2)
+case "$BOARD" in
+    stm32f407g-disc1) TARGET_CFG="target/stm32f4x.cfg" ;;
+    *)                TARGET_CFG="target/stm32g0x.cfg"  ;;
+esac
+
+echo "Flashing $ELF with $TARGET_CFG ..."
 
 openocd \
     -f interface/stlink.cfg \
-    -f target/stm32g0x.cfg \
+    -f "$TARGET_CFG" \
     -c "program $ELF verify reset exit"

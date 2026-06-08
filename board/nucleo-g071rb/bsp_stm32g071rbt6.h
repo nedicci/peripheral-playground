@@ -42,8 +42,5 @@
 #define USART2_TX_PIN           (2U)
 #define USART2_RX_PIN           (3U)
 #define USART2_AF               (1U)    /* AF1 on G071 */
-#define USART2_GPIO_CLK_ENABLE() LED_CLK_ENABLE()  /* PA shared with LED */
-#define USART2_GPIO_MODER       LED_GPIO_MODER      /* GPIOA MODER */
-#define USART2_CR1_ENABLE_MASK  ((1U << 3) | (1U << 0))  /* TE=bit3, UE=bit0 */
 
 #endif /* BSP_STM32G071RBT6_H */

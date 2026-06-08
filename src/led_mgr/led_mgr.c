@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include "led_mgr.h"
-#include "bsp_stm32g071rbT6.h"
+#include "bsp.h"
 
 void led_mgr_init(void)
 {
@@ -24,5 +24,15 @@ void led_mgr_delay(volatile uint32_t ticks)
 {
     while (ticks--) {
         __asm__ volatile ("nop");
+    }
+}
+
+void led_mgr_blink(uint32_t times)
+{
+    for (uint32_t i = 0; i < times; i++) {
+        led_mgr_on();
+        led_mgr_delay(800000U); /* ≈500 ms @ 16 MHz HSI */
+        led_mgr_off();
+        led_mgr_delay(800000U); /* ≈500 ms @ 16 MHz HSI */
     }
 }
