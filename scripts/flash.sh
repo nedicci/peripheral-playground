@@ -2,10 +2,10 @@
 set -euo pipefail
 
 BUILD_DIR="${1:-build}"
-ELF="${BUILD_DIR}/firmware.elf"
+ELF="${BUILD_DIR}/eevee-fw.elf"
 
 if [[ ! -f "$ELF" ]]; then
-    echo "Error: firmware not found at '$ELF'" >&2
+    echo "Error: eevee-fw not found at '$ELF'" >&2
     echo "Usage: ./flash.sh [build-dir]" >&2
     exit 1
 fi
