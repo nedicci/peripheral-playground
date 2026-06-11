@@ -33,6 +33,8 @@
 #define BTN_PRESSED()           (!(BUTTON_GPIO_IDR & (1U << BUTTON_PIN)))  /* active-low */
 
 /* USART2 - PA2 (TX), PA3 (RX) */
+#define USART2_GPIO_CLK_ENABLE() (*(volatile uint32_t *)(RCC_BASE_ADDR + RCC_IOPENR_OFFSET)) |= (1U << 0)
+#define USART2_GPIO_MODER       (*(volatile uint32_t *)(GPIOA_BASE_ADDR + GPIO_MODER_OFFSET))
 #define USART2_CLK_ENABLE()     (*(volatile uint32_t *)(RCC_BASE_ADDR + RCC_APBENR1_OFFSET)) |= (1U << 17)
 #define USART2_CR1              (*(volatile uint32_t *)(USART2_BASE_ADDR + USART_CR1_OFFSET))
 #define USART2_BRR              (*(volatile uint32_t *)(USART2_BASE_ADDR + USART_BRR_OFFSET))
@@ -42,5 +44,6 @@
 #define USART2_TX_PIN           (2U)
 #define USART2_RX_PIN           (3U)
 #define USART2_AF               (1U)    /* AF1 on G071 */
+#define USART2_CR1_ENABLE_MASK  ((1U << 0) | (1U << 3)) /* UE=bit0, TE=bit3 on G0 */
 
 #endif /* BSP_STM32G071RBT6_H */
