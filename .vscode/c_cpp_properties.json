@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "includePath": [
+                "${workspaceFolder}/src/**",
+                "${workspaceFolder}/cfg",
+                "${workspaceFolder}/board/stm32f407g-disc1",
+                "${workspaceFolder}/submodules/FreeRTOS/include",
+                "${workspaceFolder}/submodules/FreeRTOS/portable/GCC/ARM_CM4F"
+            ],
+            "defines": [
+                "STM32F407xx"
+            ],
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}
