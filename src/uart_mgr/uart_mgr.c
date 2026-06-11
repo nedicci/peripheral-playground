@@ -2,6 +2,23 @@
 #include "uart_mgr.h"
 #include "bsp.h"
 
+/* Queue for UART messages (holds pointers to string literals in flash) */
+QueueHandle_t uart_mgr_queue;
+
+void uart_mgr_thread(void *arg)
+{
+    (void)arg;
+    const char *msg;
+    for (;;)
+    {
+        /* Block until a message arrives in the queue */
+        if (xQueueReceive(uart_mgr_queue, &msg, portMAX_DELAY) == pdTRUE)
+        {
+            uart_mgr_send(msg);
+        }
+    }
+}
+
 void uart_mgr_init(void)
 {
     /* Enable clocks */

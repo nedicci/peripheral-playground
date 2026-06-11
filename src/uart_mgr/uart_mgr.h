@@ -3,6 +3,13 @@
 
 #include <stdint.h>
 
+#include "FreeRTOS.h"
+#include "queue.h"
+
+extern QueueHandle_t uart_mgr_queue;
+
+void uart_mgr_thread(void *arg);
+
 /* Configure USART2 at 115200, 8N1. */
 void uart_mgr_init(void);
 

@@ -1,6 +1,8 @@
 #ifndef BTN_MGR_H
 #define BTN_MGR_H
 
+void btn_mgr_thread(void *arg);
+
 /* Configure the button pin as input and enable its GPIO clock. */
 void btn_mgr_init(void);
 

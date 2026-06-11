@@ -1,6 +1,13 @@
 #ifndef LED_MGR_H
 #define LED_MGR_H
 
+#include "FreeRTOS.h"
+#include "task.h"
+
+extern TaskHandle_t led_mgr_thread_handle;
+
+void led_mgr_thread(void *arg);
+
 /* Configure the LED pin as output and enable its GPIO clock. */
 void led_mgr_init(void);
 

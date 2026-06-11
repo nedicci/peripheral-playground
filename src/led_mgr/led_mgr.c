@@ -1,6 +1,29 @@
 #include <stdint.h>
 #include "led_mgr.h"
 #include "bsp.h"
+#include "FreeRTOS.h"
+#include "task.h"
+
+TaskHandle_t led_mgr_thread_handle;
+
+void led_mgr_thread(void *arg)
+{
+    (void)arg;
+    for (;;)
+    {
+        /* Block until btn_mgr_thread signals us */
+        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+
+        /* Blink 5 times without busy-waiting */
+        for (int i = 0; i < 5; i++)
+        {
+            led_mgr_on();
+            vTaskDelay(pdMS_TO_TICKS(100));
+            led_mgr_off();
+            vTaskDelay(pdMS_TO_TICKS(100));
+        }
+    }
+}
 
 void led_mgr_init(void)
 {
